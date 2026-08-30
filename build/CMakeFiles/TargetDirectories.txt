@@ -1,0 +1,3 @@
+/home/radivuk/Desktop/Kompresija/Kompresija_projekat_1/build/CMakeFiles/main.dir
+/home/radivuk/Desktop/Kompresija/Kompresija_projekat_1/build/CMakeFiles/edit_cache.dir
+/home/radivuk/Desktop/Kompresija/Kompresija_projekat_1/build/CMakeFiles/rebuild_cache.dir
