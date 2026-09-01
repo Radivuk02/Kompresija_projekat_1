@@ -17,6 +17,6 @@ pair<unordered_map<uint8_t, string>, int> code_sha_fan(const string& input, cons
 
 vector<BajtVerovatnoca> listaSimbolaVerovatnoca(const vector<double>& pi);
 void insertionSortOpadajuce(vector<BajtVerovatnoca>& bajtoviVerovatnoce);
-void dekodiranjeFajlSH(const string& kodiraniFajl, const string& dekodiraniFajl,
-     const unordered_map<uint8_t, string>& kodovi, int validniBitovi);
+void decodeSH(const string& coded, const string& decoded,
+const unordered_map<uint8_t, string>& codes, int valid);
 #endif

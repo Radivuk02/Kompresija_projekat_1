@@ -30,15 +30,15 @@ unordered_map<uint8_t, string> shannonFano(vector<BajtVerovatnoca> bajtoviVerova
     auto leviKod = shannonFano(levaGrupa);
     auto desniKod = shannonFano(desnaGrupa);
 
-    unordered_map<uint8_t, string> kodovi;
+    unordered_map<uint8_t, string> codes;
     for (const auto& pair : leviKod) {
-        kodovi[pair.first] = "0" + pair.second;
+        codes[pair.first] = "0" + pair.second;
     }
     for (const auto& pair : desniKod) {
-        kodovi[pair.first] = "1" + pair.second;
+        codes[pair.first] = "1" + pair.second;
     }
 
-    return kodovi;
+    return codes;
 }
 
 pair<unordered_map<uint8_t, string>, int> code_sha_fan(const string& input, const string& output) {
@@ -63,26 +63,26 @@ pair<unordered_map<uint8_t, string>, int> code_sha_fan(const string& input, cons
         }
     }
 
-    int validniBitovi = 8;
+    int valid = 8;
     if (!kodiraniPodaciBafer.empty()) {
-        validniBitovi = kodiraniPodaciBafer.length();
-        kodiraniPodaciBafer.append(8 - validniBitovi, '0');
+        valid = kodiraniPodaciBafer.length();
+        kodiraniPodaciBafer.append(8 - valid, '0');
         uint8_t bajtZaUpis = static_cast<uint8_t>(stoi(kodiraniPodaciBafer, nullptr, 2));
         fajlIzlaz.write(reinterpret_cast<char*>(&bajtZaUpis), 1);
     }
 
     fajlIzlaz.close();
-    return {kod, validniBitovi};
+    return {kod, valid};
 }
 
-void dekodiranjeFajlSH(const string& kodiraniFajl, const string& dekodiraniFajl,
-     const unordered_map<uint8_t, string>& kodovi, int validniBitovi) {
+void decodeSH(const string& coded, const string& decoded,
+    const unordered_map<uint8_t, string>& codes, int valid){
     unordered_map<string, uint8_t> recnik;
-    for (const auto& [bajt, kod] : kodovi) {
+    for (const auto& [bajt, kod] : codes) {
         recnik[kod] = bajt;
     }
 
-    ifstream fajl(kodiraniFajl, ios::binary);
+    ifstream fajl(coded, ios::binary);
     vector<uint8_t> bajtovi((istreambuf_iterator<char>(fajl) ), istreambuf_iterator<char>());
     fajl.close();
 
@@ -90,7 +90,7 @@ void dekodiranjeFajlSH(const string& kodiraniFajl, const string& dekodiraniFajl,
     for (size_t i = 0; i < bajtovi.size(); ++i) {
         string bBits = bitset<8>(bajtovi[i]).to_string();
         if (i == bajtovi.size() - 1) {
-            bitovi += bBits.substr(0, validniBitovi);
+            bitovi += bBits.substr(0, valid);
         } else {
             bitovi += bBits;
         }
@@ -107,7 +107,7 @@ void dekodiranjeFajlSH(const string& kodiraniFajl, const string& dekodiraniFajl,
         }
     }
 
-    ofstream fajlIzlaz(dekodiraniFajl, ios::binary);
+    ofstream fajlIzlaz(decoded, ios::binary);
     fajlIzlaz.write(reinterpret_cast<char*>(dekodiraniBajtovi.data()), dekodiraniBajtovi.size());
     fajlIzlaz.close();
 }
