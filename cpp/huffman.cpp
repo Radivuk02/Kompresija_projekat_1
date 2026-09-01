@@ -67,37 +67,3 @@ pair<unordered_map<uint8_t, string>, int> codeHuffman(const string& ulazniFajl, 
     return {kodovi, validniBitovi};
 }
 
-void huffCodes(shared_ptr<Node> root, const string& prefiks, unordered_map<uint8_t, string>& kodovi) {
-    if (!root) return;
-
-    if (root->isLeaf) {
-        kodovi[root->bajt] = prefiks.empty() ? "0" : prefiks;
-    } else {
-        huffCodes(root->levo, prefiks + "0", kodovi);
-        huffCodes(root->desno, prefiks + "1", kodovi);
-    }
-}
-
-
-vector<BajtVerovatnoca> listaSimbolaVerovatnoca(const vector<double>& pi) {
-    vector<BajtVerovatnoca> bajtoviVerovatnoce;
-    for (int i = 0; i < 256; ++i) {
-        if (pi[i] > 0) {
-            bajtoviVerovatnoce.push_back({static_cast<uint8_t>(i), pi[i]});
-        }
-    }
-    return bajtoviVerovatnoce;
-}
-
-void insertionSortOpadajuce(vector<BajtVerovatnoca>& bajtoviVerovatnoce) {
-    int n = bajtoviVerovatnoce.size();
-    for (int i = 1; i < n; ++i) {
-        BajtVerovatnoca tempBajt = bajtoviVerovatnoce[i];
-        int j = i - 1;
-        while (j >= 0 && bajtoviVerovatnoce[j].second < tempBajt.second) {
-            bajtoviVerovatnoce[j + 1] = bajtoviVerovatnoce[j];
-            j--;
-        }
-        bajtoviVerovatnoce[j + 1] = tempBajt;
-    }
-}

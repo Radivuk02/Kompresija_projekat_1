@@ -10,4 +10,5 @@ add_executable(main
 	main.cpp
 	cpp/entropy.cpp
 	cpp/sha_fan.cpp
+	cpp/huffman.cpp
     )

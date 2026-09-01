@@ -1,5 +1,6 @@
 #include "headers/entropy.h"
 #include "headers/sha_fan.h"
+#include "headers/huffman.h"
 #include<iostream>
 #include<fstream>
 #include <filesystem>
@@ -33,7 +34,7 @@ int main(){
     for (const auto& [bajt, kod] : kodovi) {
         fajlKod << "Bajt " << static_cast<int>(bajt) << ": " << kod << "\n";
     }
-
+    fajlKod.close();
     decodeSH(codedFile, decodedFile, kodovi, validniBitovi);
     cout << "Dekodiranje zavrseno.\n";
 
@@ -42,6 +43,28 @@ int main(){
     } else {
         cout << "NEUSPESNO implementiran Shannon Fano algoritam\n";
     }
+
+
+    codedFile = "compress/huffman.bin";
+    decodedFile = "decompress/huffman.bin";
+    codes = "codes/huffman.txt";
+
+    tie(kodovi, validniBitovi) = codeHuffman(input, codedFile);
+    cout << "Huffman Kodiranje zavrseno.\n";
+    fajlKod.open(codes);
+    for (const auto& [bajt, kod] : kodovi) {
+        fajlKod << "Bajt " << static_cast<int>(bajt) << ": " << kod << "\n";
+    }
+
+    decodeSH(codedFile, decodedFile, kodovi, validniBitovi);
+    cout << "Dekodiranje zavrseno.\n";
+
+    if (uporediFajlove(input, decodedFile)) {
+        cout << "USPESNO implementiran Huffmanov algoritam\n";
+    } else {
+        cout << "NEUSPESNO implementiran Huffmanov algoritam\n";
+    }
+
     return 0;
 
 }
