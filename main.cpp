@@ -1,6 +1,7 @@
 #include "headers/entropy.h"
 #include "headers/sha_fan.h"
 #include "headers/huffman.h"
+#include "headers/lz77.h"
 #include<iostream>
 #include<fstream>
 #include <filesystem>
@@ -63,6 +64,27 @@ int main(){
         cout << "USPESNO implementiran Huffmanov algoritam\n";
     } else {
         cout << "NEUSPESNO implementiran Huffmanov algoritam\n";
+    }
+
+    codedFile = "compress/lz77.bin";
+    decodedFile = "decompress/lz77.bin";
+    codes = "codes/lz77.txt";
+
+    auto kodoviLZ77 = codeLZ77(input, codedFile);
+    cout << "LZ77 Kodiranje zavrseno.\n";
+
+    fajlKod.open(codes);
+    for (const auto& [pomak, duzina, sledeci] : kodoviLZ77) {
+        fajlKod << "(" << pomak << ", " << static_cast<int>(duzina) << ", " << static_cast<int>(sledeci) << ")\n";
+    }
+    fajlKod.close();
+
+    decodeLZ77(codedFile, decodedFile);
+
+    if (uporediFajlove(input, decodedFile)) {
+        cout << "USPESNO implementiran LZ77 algoritam\n";
+    } else {
+        cout << "NEUSPESNO implementiran LZ77 algoritam\n";
     }
 
     return 0;

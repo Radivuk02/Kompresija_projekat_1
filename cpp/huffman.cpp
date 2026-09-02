@@ -12,8 +12,9 @@ void huffCodes(shared_ptr<Node> root, const string& prefiks, unordered_map<uint8
     }
 }
 
-pair<unordered_map<uint8_t, string>, int> codeHuffman(const string& ulazniFajl, const string& izlazniFajl) {
-    auto [entropija, pi] = bajtEntropija(ulazniFajl);
+pair<unordered_map<uint8_t, string>, int> codeHuffman(const string& input, const string& output)
+ {
+    auto [entropija, pi] = bajtEntropija(input);
     auto bajtoviVerovatnoce = listaSimbolaVerovatnoca(pi);
 
     vector<shared_ptr<Node>> cvorovi;
@@ -38,8 +39,8 @@ pair<unordered_map<uint8_t, string>, int> codeHuffman(const string& ulazniFajl, 
     unordered_map<uint8_t, string> kodovi;
     huffCodes(cvorovi[0], "", kodovi);
 
-    ifstream fajlUlaz(ulazniFajl, ios::binary);
-    ofstream fajlIzlaz(izlazniFajl, ios::binary);
+    ifstream fajlUlaz(input, ios::binary);
+    ofstream fajlIzlaz(output, ios::binary);
 
     vector<uint8_t> podaci((istreambuf_iterator<char>(fajlUlaz)), istreambuf_iterator<char>());
     fajlUlaz.close();

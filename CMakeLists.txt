@@ -12,4 +12,5 @@ add_executable(main
 	cpp/functions.cpp
 	cpp/sha_fan.cpp
 	cpp/huffman.cpp
+	cpp/lz77.cpp
     )
