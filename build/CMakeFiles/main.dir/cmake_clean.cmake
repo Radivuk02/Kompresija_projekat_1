@@ -1,0 +1,23 @@
+file(REMOVE_RECURSE
+  "CMakeFiles/main.dir/cpp/entropy.cpp.o"
+  "CMakeFiles/main.dir/cpp/entropy.cpp.o.d"
+  "CMakeFiles/main.dir/cpp/functions.cpp.o"
+  "CMakeFiles/main.dir/cpp/functions.cpp.o.d"
+  "CMakeFiles/main.dir/cpp/huffman.cpp.o"
+  "CMakeFiles/main.dir/cpp/huffman.cpp.o.d"
+  "CMakeFiles/main.dir/cpp/lz77.cpp.o"
+  "CMakeFiles/main.dir/cpp/lz77.cpp.o.d"
+  "CMakeFiles/main.dir/cpp/lzw.cpp.o"
+  "CMakeFiles/main.dir/cpp/lzw.cpp.o.d"
+  "CMakeFiles/main.dir/cpp/sha_fan.cpp.o"
+  "CMakeFiles/main.dir/cpp/sha_fan.cpp.o.d"
+  "CMakeFiles/main.dir/main.cpp.o"
+  "CMakeFiles/main.dir/main.cpp.o.d"
+  "main"
+  "main.pdb"
+)
+
+# Per-language clean rules from dependency scanning.
+foreach(lang CXX)
+  include(CMakeFiles/main.dir/cmake_clean_${lang}.cmake OPTIONAL)
+endforeach()

@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/main.dir/main.cpp.o CMakeFiles/main.dir/cpp/entropy.cpp.o CMakeFiles/main.dir/cpp/functions.cpp.o CMakeFiles/main.dir/cpp/sha_fan.cpp.o CMakeFiles/main.dir/cpp/huffman.cpp.o CMakeFiles/main.dir/cpp/lz77.cpp.o CMakeFiles/main.dir/cpp/lzw.cpp.o -o main 

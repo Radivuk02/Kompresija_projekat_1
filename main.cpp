@@ -2,6 +2,7 @@
 #include "headers/sha_fan.h"
 #include "headers/huffman.h"
 #include "headers/lz77.h"
+#include "headers/lzw.h"
 #include<iostream>
 #include<fstream>
 #include <filesystem>
@@ -87,6 +88,32 @@ int main(){
         cout << "NEUSPESNO implementiran LZ77 algoritam\n";
     }
 
+codedFile = "compress/lzw.bin";
+    decodedFile = "decompress/lzw.bin";
+    codes = "codes/lzw.txt";
+
+
+    map<vector<uint8_t>, int> kodoviLZW;
+
+    tie(kodoviLZW, validniBitovi) = codeLZW(input, codedFile);
+    cout << "LZW Kodiranje zavrseno.\n";
+
+    fajlKod.open(codes);
+    for (const auto& [niz, kod] : kodoviLZW) {
+        fajlKod << "BAJT [";
+        for (uint8_t b : niz) fajlKod << static_cast<int>(b) << " ";
+        fajlKod << "]: Kod " << kod << "\n";
+    }
+    fajlKod.close();
+
+    decodeLZW(codedFile, decodedFile, kodoviLZW, validniBitovi);
+    cout << "Dekodiranje zavrseno.\n";
+
+    if (uporediFajlove(input, decodedFile)) {
+        cout << "USPESNO implementiran LZW algoritam\n";
+    } else {
+        cout << "NEUSPESNO implementiran LZW algoritam\n";
+    }
     return 0;
 
 }
