@@ -9,6 +9,7 @@ include_directories(${PROJECT_SOURCE_DIR}/headers)
 add_executable(main
 	main.cpp
 	cpp/entropy.cpp
+	cpp/functions.cpp
 	cpp/sha_fan.cpp
 	cpp/huffman.cpp
     )
