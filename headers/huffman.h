@@ -29,4 +29,5 @@ using namespace std;
     void huffCodes(shared_ptr<Node> root, const string& prefiks, unordered_map<uint8_t, string>& kodovi);
     pair<unordered_map<uint8_t, string>, int> codeHuffman(const string& input, const string& output);
 
+    void decodeHuffman(const string& kodiraniFajl, const string& dekodiraniFajl, const unordered_map<uint8_t, string>& kodovi, int validniBitovi);
 #endif

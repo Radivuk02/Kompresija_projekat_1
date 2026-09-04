@@ -68,3 +68,47 @@ pair<unordered_map<uint8_t, string>, int> codeHuffman(const string& input, const
     return {kodovi, validniBitovi};
 }
 
+void decodeHuffman(const string& kodiraniFajl, const string& dekodiraniFajl, const unordered_map<uint8_t, string>& kodovi, int validniBitovi) {
+    
+    unordered_map<string, uint8_t> obrnutiKodovi;
+    for (const auto& [bajt, kod] : kodovi) {
+        obrnutiKodovi[kod] = bajt;
+    }
+
+
+    ifstream fajl(kodiraniFajl, ios::binary);
+    if (!fajl) return;
+
+    vector<uint8_t> bajtovi((istreambuf_iterator<char>(fajl)), istreambuf_iterator<char>());
+    fajl.close();
+
+    if (bajtovi.empty()) return;
+
+
+    string bitovi = "";
+    for (size_t i = 0; i < bajtovi.size(); ++i) {
+        string bBits = bitset<8>(bajtovi[i]).to_string();
+        if (i == bajtovi.size() - 1) {
+            bitovi += bBits.substr(0, validniBitovi);
+        } else {
+            bitovi += bBits;
+        }
+    }
+
+
+    vector<uint8_t> dekodiraniBajtovi;
+    string uzorak = "";
+    for (char bit : bitovi) {
+        uzorak += bit;
+        if (obrnutiKodovi.find(uzorak) != obrnutiKodovi.end()) {
+            dekodiraniBajtovi.push_back(obrnutiKodovi[uzorak]);
+            uzorak = "";
+        }
+    }
+
+
+    ofstream fajlIzlaz(dekodiraniFajl, ios::binary);
+    fajlIzlaz.write(reinterpret_cast<char*>(dekodiraniBajtovi.data()), dekodiraniBajtovi.size());
+    fajlIzlaz.close();
+}
+

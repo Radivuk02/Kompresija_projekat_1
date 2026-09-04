@@ -1,0 +1,21 @@
+========================================================================================
+                            IZVESTAJ O KOMPRESIJI PODATAKA                              
+========================================================================================
+
+Ulazni fajl: input.bin
+Velicina originala: 2.7466 MB
+Bajt-Entropija: 4.0305 bit/simbol
+
+Algoritam      Komp.(MB)       Stepen        Vreme K.(ms)    Vreme D.(ms)    Status    
+----------------------------------------------------------------------------------------
+Shannon-Fano   1.4114          1.95          3295.76         5931.22         USPESNO   
+Huffman        1.3924          1.97          3192.56         6058.27         USPESNO   
+LZ77           0.6867          4.00          1147.98         356.68          USPESNO   
+LZW            0.0409          67.16         22985.63        893.36          USPESNO   
+
+UPUTSTVO ZA POKRETANJE IMPLEMENTACIJE:
+1. Postaviti 'input.bin' u korenski direktorijum projekta.
+2. Otvoriti terminal i pozicionirati se u projekat.
+3. Kreirati build folder: mkdir -p build && cd build
+4. Kompajlirati kod: cmake .. && make
+5. Pokrenuti executable sa: ./main (iz build foldera)
