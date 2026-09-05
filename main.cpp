@@ -41,7 +41,7 @@ double izmeriVreme(Func funkcija) {
 }
 
 int main() {
-    // 1. Kreiranje direktorijuma
+
     fs::create_directory("compress");
     fs::create_directory("decompress");
     fs::create_directory("codes");
@@ -62,7 +62,7 @@ int main() {
 
     ofstream fajlKod;
 
-    // --- 1. SHANNON-FANO ---
+    
     string codedFile = "compress/ShannonFano.bin";
     string decodedFile = "decompress/ShannonFano.bin";
     string codes = "codes/ShannonFano.txt";
@@ -90,7 +90,7 @@ int main() {
     cout << (statusSF ? "USPESNO" : "NEUSPESNO") << " implementiran Shannon Fano algoritam\n\n";
 
 
-    // --- 2. HUFFMAN ---
+
     codedFile = "compress/huffman.bin";
     decodedFile = "decompress/huffman.bin";
     codes = "codes/huffman.txt";
@@ -118,13 +118,12 @@ int main() {
     cout << (statusHuf ? "USPESNO" : "NEUSPESNO") << " implementiran Huffmanov algoritam\n\n";
 
 
-    // --- 3. LZ77 ---
-    // --- 3. LZ77 ---
+
     codedFile = "compress/lz77.bin";
     decodedFile = "decompress/lz77.bin";
     codes = "codes/lz77.txt";
 
-    // 1. Deklarišemo odgovarajući tip koji funkcija codeLZ77 zapravo vraća
+
     vector<LZ77Triple> kodoviLZ77;
 
     double tKompLZ77 = izmeriVreme([&]() {
@@ -133,7 +132,7 @@ int main() {
     cout << "LZ77 Kodiranje zavrseno.\n";
 
 fajlKod.open(codes);
-    // Dekonstrukcija tuple-a na individualne promenljive
+
     for (const auto& [pomak, duzina, sledeci] : kodoviLZ77) {
         fajlKod << "(" << pomak << ", " 
                 << static_cast<int>(duzina) << ", " 
@@ -148,7 +147,7 @@ fajlKod.open(codes);
 
     bool statusLZ77 = uporediFajlove(input, decodedFile);
     cout << (statusLZ77 ? "USPESNO" : "NEUSPESNO") << " implementiran LZ77 algoritam\n\n";
-    // --- 4. LZW ---
+
     codedFile = "compress/lzw.bin";
     decodedFile = "decompress/lzw.bin";
     codes = "codes/lzw.txt";
@@ -178,7 +177,7 @@ fajlKod.open(codes);
     cout << (statusLZW ? "USPESNO" : "NEUSPESNO") << " implementiran LZW algoritam\n\n";
 
 
-    // --- 5. GENERISANJE IZVEŠTAJA (izvestaj.txt) ---
+
     ofstream izvestaj("izvestaj.txt");
     izvestaj << "========================================================================================\n";
     izvestaj << "                            IZVESTAJ O KOMPRESIJI PODATAKA                              \n";
@@ -211,12 +210,7 @@ fajlKod.open(codes);
     upisiRed("LZ77", "compress/lz77.bin", tKompLZ77, tDekomLZ77, statusLZ77);
     upisiRed("LZW", "compress/lzw.bin", tKompLZW, tDekomLZW, statusLZW);
 
-    izvestaj << "\nUPUTSTVO ZA POKRETANJE IMPLEMENTACIJE:\n";
-    izvestaj << "1. Postaviti 'input.bin' u korenski direktorijum projekta.\n";
-    izvestaj << "2. Otvoriti terminal i pozicionirati se u projekat.\n";
-    izvestaj << "3. Kreirati build folder: mkdir -p build && cd build\n";
-    izvestaj << "4. Kompajlirati kod: cmake .. && make\n";
-    izvestaj << "5. Pokrenuti executable sa: ./main (iz build foldera)\n";
+    
     izvestaj.close();
 
     cout << "=========================================\n";
